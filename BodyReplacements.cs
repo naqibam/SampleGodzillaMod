@@ -55,7 +55,10 @@ namespace ModelReplacement
 			else
 			{
 				float x = voice.IsSpeaking && !player.isPlayerDead ? Mathf.Clamp(Map(voice.Amplitude * sensitivity, 0, 1, initialJawOpening, maxJawOpening), maxJawOpening, initialJawOpening) : initialJawOpening;
-
+    
+    				// If you happen to have a problem where your mouth snaps open and closes with no animation regardless
+				// of sound level at the lowest sensitivity, someone was able to solve this by replacing the above line with the one below.
+				// float x = voice.IsSpeaking && !player.isPlayerDead ? Mathf.Clamp(Map(voice.Amplitude * sensitivity, 1, 0, initialJawOpening, maxJawOpening), maxJawOpening, initialJawOpening) : maxJawOpening;
 				Vector3 localRotation = startingLocalRotation;
 				localRotation.x = x;
 				((Component)this).gameObject.transform.localRotation = Quaternion.Euler(localRotation);
